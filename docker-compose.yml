@@ -1,0 +1,12 @@
+services:
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VITE_GIT_URL=${VITE_GIT_URL:-https://github.com/theakash04/Nubilus}
+        - VITE_DEV_URL=${VITE_DEV_URL:-https://akashtwt.me/zapme}
+    container_name: nubilus-docs
+    restart: unless-stopped
+    ports:
+      - "3002:80"
