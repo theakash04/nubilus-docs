@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { CloudOff, Home, ArrowLeft } from "lucide-react";
+import { CloudOff, Home } from "lucide-react";
 
 export const NotFound = () => {
   return (
