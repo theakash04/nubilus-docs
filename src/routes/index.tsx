@@ -1,6 +1,6 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
 import { Button } from '@/components/ui/Button'
-import { ArrowRight, Building, Database, Github, Server, Shield, Terminal } from 'lucide-react'
+import { createFileRoute, Link } from '@tanstack/react-router'
+import { ArrowRight, Building, Clock, Database, Github, Server, Shield, Smartphone, Terminal } from 'lucide-react'
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -167,7 +167,7 @@ function App() {
                    </div>
               </div>
 
-              <div className="relative group overflow-hidden bg-muted rounded-2xl sm:rounded-3xl border border-border p-5 sm:p-8 transition-all duration-500">
+              <div className="md:col-span-2 relative group overflow-hidden bg-muted rounded-2xl sm:rounded-3xl border border-border p-5 sm:p-8 transition-all duration-500">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-card rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 shadow-sm ring-1 ring-border">
                       <Server className="w-5 h-5 sm:w-6 sm:h-6 text-amber-500" />
                   </div>
@@ -183,19 +183,29 @@ function App() {
                    <p className="text-muted-foreground text-sm leading-relaxed">Because it's self-hosted, your infrastructure data never leaves your network.</p>
               </div>
 
+              <div className="md:col-span-2 relative group overflow-hidden bg-muted rounded-2xl sm:rounded-3xl border border-border p-5 sm:p-8 transition-all duration-500">
+                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-card rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 shadow-sm ring-1 ring-border">
+                      <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500" />
+                   </div>
+                   <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">Install as App</h3>
+                   <p className="text-muted-foreground text-sm leading-relaxed">Add to your home screen for quick access — no need to open the browser every time.</p>
+              </div>
+
                <div className="md:col-span-3 relative group overflow-hidden bg-muted rounded-2xl sm:rounded-3xl border border-border p-5 sm:p-8 flex flex-col md:flex-row items-center justify-between transition-all duration-500 h-auto md:h-[200px]">
                    <div className="md:w-1/2 mb-4 md:mb-0 relative z-10">
-                       <div className="flex items-center space-x-3 mb-3">
+                       <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3">
                           <div className="w-10 h-10 bg-card rounded-xl flex items-center justify-center shadow-sm ring-1 ring-border">
                               <Database className="w-5 h-5 text-indigo-500" />
                           </div>
-                           <h3 className="text-lg sm:text-xl font-bold text-foreground">Database Monitoring</h3>
-                               <span className="px-2 py-0.5 text-[10px] sm:text-xs font-semibold bg-amber-500/20 text-amber-400 rounded-full ring-1 ring-amber-500/30">Coming Soon</span>
+                          <h3 className="text-lg sm:text-xl font-bold text-foreground">Database Monitoring</h3>
+                          <span className="px-2 py-0.5 text-[10px] sm:text-xs hidden sm:block font-semibold bg-amber-500/20 text-amber-400 rounded-full ring-1 ring-amber-500/30">Coming Soon</span>
+                          <span className="sm:hidden text-amber-400">
+                          <Clock size={16}/>
+                          </span>
                        </div>
                        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">Monitor connection pools, transaction rates, and cache hits for Postgres, MySQL, and Redis.</p>
                    </div>
                </div>
-
            </div>
         </div>
       </div>
