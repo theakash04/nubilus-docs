@@ -82,8 +82,6 @@ Monitor your servers with the lightweight Rust agent:
 - **Network** — Bytes transmitted and received
 - **Heartbeat** — Real-time online/offline detection
 
-<!-- coming-soon -->
-
 ### Endpoint Monitoring
 
 Keep your services healthy:
@@ -93,13 +91,18 @@ Keep your services healthy:
 - **Uptime Tracking** — Historical availability percentages
 - **Custom Validation** — Verify expected status codes
 
+Learn more about [Endpoint Monitoring](./endpoint-monitoring).
+
 ### Database Monitoring
 
 Stay connected to your data:
 
 - **Multi-Database Support** — PostgreSQL, MySQL, MongoDB, Redis, MariaDB
-- **Connection Health** — Continuous connectivity monitoring
+- **Connection Health** — Continuous connectivity monitoring with detailed metrics
 - **Configurable Intervals** — Adjust check frequency per database
+- **Detailed Metrics** — Connection counts, cache hit ratio, database size, and more
+
+Learn more about [Database Monitoring](./database-monitoring).
 
 ### Alerting System
 
@@ -127,8 +130,6 @@ graph LR
     style Actions fill:#059669,color:#fff
 ```
 
-<!-- /coming-soon -->
-
 ### Multi-Tenancy
 
 Built for teams:
@@ -137,8 +138,6 @@ Built for teams:
 - **API Keys** — Secure, revocable agent authentication
 - **Team Invitations** — Invite members via email
 - **Permission Management** — Control access within organizations
-
----
 
 ## Tech Stack
 
@@ -177,8 +176,6 @@ graph LR
     style Infra fill:#336791,color:#fff
 ```
 
----
-
 ## Use Cases
 
 | Scenario               | Description                                            |
@@ -188,8 +185,6 @@ graph LR
 | **DevOps Teams**       | Centralized infrastructure visibility for your team    |
 | **Multi-Cloud**        | Unified monitoring across AWS, GCP, Azure, and on-prem |
 | **Compliance**         | Keep monitoring data within your own infrastructure    |
-
----
 
 ## Security
 

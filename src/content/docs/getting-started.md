@@ -15,11 +15,9 @@ By the end of this guide, you will have:
 1. Created your first organization
 2. Generated an API key
 3. Installed an agent on a server
-<!-- coming-soon -->
 4. Set up endpoint monitoring
 5. Configured alert rules
 6. Connected a database for monitoring
-<!-- /coming-soon -->
 
 ## Step 1: Login & Create Organization
 
@@ -59,7 +57,6 @@ graph TD
 1. Click **"Create Organization"** from the dashboard
 2. Enter a name (e.g., "Production", "My Homelab", "Company Name")
 3. Click **Create**
-
 
 ## Step 2: Generate an API Key
 
@@ -103,7 +100,6 @@ flowchart LR
 - One API key can be used by multiple agents
 - Revoke keys immediately if compromised
 - Use descriptive names for easy management
-
 
 ## Step 3: Install Your First Agent
 
@@ -168,9 +164,6 @@ graph LR
     NET --> NET_M
 ```
 
----
-
-<!-- coming-soon -->
 
 ## Step 4: Set Up Endpoint Monitoring
 
@@ -223,8 +216,6 @@ sequenceDiagram
 | Website      | `https://www.example.com`          | 120s           |
 | Auth Service | `https://auth.example.com/ping`    | 30s            |
 | CDN Check    | `https://cdn.example.com/test.png` | 300s           |
-
----
 
 ## Step 5: Add Database Monitoring
 
@@ -287,8 +278,6 @@ Timeout: 10 seconds
 
 > [!WARNING]
 > **Security Best Practice:** Create a read-only database user for monitoring purposes. Avoid using admin credentials.
-
----
 
 ## Step 6: Configure Alert Rules
 
@@ -362,8 +351,6 @@ stateDiagram-v2
     Resolved: Resolved
 ```
 
-<!-- /coming-soon -->
-
 ## Checklist
 
 You've completed the getting started guide! Here's what you've accomplished:
@@ -371,7 +358,9 @@ You've completed the getting started guide! Here's what you've accomplished:
 - [x] Created an organization
 - [x] Generated an API key
 - [x] Installed the agent on a server
-
+- [x] Set up endpoint monitoring
+- [x] Added database monitoring
+- [x] Configured alert rules
 
 ## Next Steps
 
@@ -385,7 +374,6 @@ You've completed the getting started guide! Here's what you've accomplished:
 2. Click **"Invite Member"**
 3. Enter their name, email address and permissions
 4. They'll receive an invitation to join your organization
-
 
 **Happy Monitoring!**
 
