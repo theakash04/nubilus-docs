@@ -3,13 +3,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   Building,
-  Clock,
   Database,
   Github,
   Server,
   Shield,
   Smartphone,
-  Terminal,
+  Terminal
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
