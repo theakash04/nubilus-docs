@@ -44,7 +44,7 @@ Add markdown files to `src/content/` — they will be automatically available as
 ## 🔗 Links
 
 - [Nubilus Main Repository](https://github.com/theakash04/Nubilus)
-- [Live Documentation](https://nubilus-docs.akashtwt.me)
+- [Live Documentation](https://nubilus.akashtwt.me)
 
 ## 📄 License
 
