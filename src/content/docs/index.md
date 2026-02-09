@@ -119,12 +119,10 @@ graph LR
     end
 
     subgraph Actions["Notifications"]
-        W["Webhook<br/>(Slack, Discord)"]
-        E["Email<br/>(Coming Soon)"]
+        E["Email"]
     end
 
-    R1 & R2 & R3 & R4 & R5 --> W
-    R1 & R2 & R3 & R4 & R5 -.-> E
+    R1 & R2 & R3 & R4 & R5 --> E
 
     style Rules fill:#7c3aed,color:#fff
     style Actions fill:#059669,color:#fff
