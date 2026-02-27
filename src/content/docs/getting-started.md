@@ -107,6 +107,8 @@ flowchart LR
 
 SSH into the server you want to monitor and run:
 
+#### Linux / macOS
+
 ```bash
 # Download and install
 curl -sSL https://github.com/theakash04/Nubilus/releases/latest/download/install.sh | sudo bash
@@ -119,6 +121,22 @@ nubilus-agent run
 
 # Start the agent
 sudo systemctl enable --now nubilus-agent
+```
+
+#### Windows (PowerShell as Administrator)
+
+```powershell
+# Download and install
+irm https://github.com/theakash04/Nubilus/releases/latest/download/install.ps1 | iex
+
+# Configure with your API key
+nubilus-agent.exe configure --api-url "backend_url/api/v1" --api-key "nub_your_api_key_here"
+
+# Register your agent
+nubilus-agent.exe run
+
+# Start the service
+sc.exe start nubilus-agent
 ```
 
 ### Verify Connection
@@ -163,7 +181,6 @@ graph LR
     DISK --> DISK_M
     NET --> NET_M
 ```
-
 
 ## Step 4: Set Up Endpoint Monitoring
 

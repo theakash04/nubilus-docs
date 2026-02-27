@@ -276,7 +276,7 @@ npm run dev
 
 ## Agent Installation
 
-The Nubilus Agent is a lightweight Rust binary that collects and reports server metrics.
+The Nubilus Agent is a lightweight Rust binary that collects and reports server metrics. It runs on **Linux**, **macOS**, and **Windows**.
 
 ### Agent Communication Flow
 
@@ -304,13 +304,30 @@ sequenceDiagram
     end
 ```
 
-### One-Line Installation (Linux/macOS)
+### One-Line Installation
+
+#### Linux / macOS
 
 ```bash
 curl -sSL https://github.com/theakash04/Nubilus/releases/latest/download/install.sh | sudo bash
 ```
 
+#### Windows (PowerShell as Administrator)
+
+```powershell
+irm https://github.com/theakash04/Nubilus/releases/latest/download/install.ps1 | iex
+```
+
+The PowerShell installer will:
+
+- Download the binary to `C:\Program Files\nubilus\`
+- Create config at `C:\ProgramData\nubilus\agent.toml`
+- Register `nubilus-agent` as a Windows Service with auto-restart
+- Add the install directory to your system PATH
+
 ### Manual Installation
+
+#### Linux / macOS
 
 ```bash
 # Download the binary (Linux x86_64)
@@ -324,9 +341,21 @@ chmod +x /usr/local/bin/nubilus-agent
 sudo mkdir -p /etc/nubilus
 ```
 
+#### Windows
+
+Download `nubilus-agent-windows-amd64.exe` from the [latest release](https://github.com/theakash04/Nubilus/releases/latest) and place it in `C:\Program Files\nubilus\`.
+
+```powershell
+# Create config directory
+New-Item -ItemType Directory -Force -Path "C:\ProgramData\nubilus"
+```
+
 ### Configuration
 
-Create `/etc/nubilus/agent.toml`:
+| Platform      | Config File Path                    |
+| ------------- | ----------------------------------- |
+| Linux / macOS | `/etc/nubilus/agent.toml`           |
+| Windows       | `C:\ProgramData\nubilus\agent.toml` |
 
 ```yml
 [server]
@@ -347,6 +376,8 @@ nubilus-agent configure --api-url "backend_url" --api-key "nub_your_api_key_here
 
 ### Start as a Service
 
+#### Linux (systemd)
+
 ```bash
 # Enable and start the service
 sudo systemctl enable --now nubilus-agent
@@ -356,6 +387,22 @@ sudo systemctl status nubilus-agent
 
 # View logs
 sudo journalctl -u nubilus-agent -f
+```
+
+#### Windows
+
+```powershell
+# If installed via install.ps1, the service is already registered
+sc.exe start nubilus-agent
+
+# Check status
+sc.exe query nubilus-agent
+```
+
+#### Run Manually (all platforms)
+
+```bash
+nubilus-agent run
 ```
 
 ### Build from Source
@@ -389,6 +436,8 @@ docker-compose exec backend npm run db:migrate
 
 ### Agent Update
 
+#### Linux / macOS
+
 ```bash
 # Self-update to latest version
 sudo nubilus-agent update
@@ -396,6 +445,15 @@ sudo nubilus-agent update
 # Restart the service
 sudo systemctl restart nubilus-agent
 ```
+
+#### Windows (Administrator)
+
+```powershell
+# Self-update to latest version
+nubilus-agent.exe update
+```
+
+The agent will automatically restart the Windows service after updating.
 
 ## Uninstallation
 
@@ -414,6 +472,8 @@ docker rmi nubilus-backend nubilus-frontend
 
 ### Agent Uninstallation
 
+#### Linux / macOS
+
 ```bash
 # Using the built-in command
 sudo nubilus-agent uninstall
@@ -423,6 +483,19 @@ sudo systemctl stop nubilus-agent
 sudo systemctl disable nubilus-agent
 sudo rm /usr/local/bin/nubilus-agent
 sudo rm -rf /etc/nubilus
+```
+
+#### Windows (Administrator)
+
+```powershell
+# Using the built-in command
+nubilus-agent.exe uninstall
+
+# Or manually
+sc.exe stop nubilus-agent
+sc.exe delete nubilus-agent
+Remove-Item "C:\Program Files\nubilus" -Recurse -Force
+Remove-Item "C:\ProgramData\nubilus" -Recurse -Force
 ```
 
 ## Troubleshooting

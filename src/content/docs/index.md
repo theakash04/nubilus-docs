@@ -62,13 +62,13 @@ graph TB
 
 ### Component Summary
 
-| Component    | Purpose                        | Technology                   |
-| ------------ | ------------------------------ | ---------------------------- |
-| **Agent**    | Collects server metrics        | Rust, tokio, sysinfo         |
-| **Backend**  | API, data processing, alerting | Node.js, Express, TypeScript |
-| **Frontend** | Visualization dashboard        | React 19, Vite, TanStack     |
-| **Database** | Time-series metrics storage    | TimescaleDB (PostgreSQL)     |
-| **Queue**    | Background jobs & caching      | Redis + BullMQ               |
+| Component    | Purpose                        | Technology                                   |
+| ------------ | ------------------------------ | -------------------------------------------- |
+| **Agent**    | Collects server metrics        | Rust, tokio, sysinfo (Linux, macOS, Windows) |
+| **Backend**  | API, data processing, alerting | Node.js, Express, TypeScript                 |
+| **Frontend** | Visualization dashboard        | React 19, Vite, TanStack                     |
+| **Database** | Time-series metrics storage    | TimescaleDB (PostgreSQL)                     |
+| **Queue**    | Background jobs & caching      | Redis + BullMQ                               |
 
 ## Key Features
 
