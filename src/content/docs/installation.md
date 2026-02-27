@@ -315,15 +315,28 @@ curl -sSL https://github.com/theakash04/Nubilus/releases/latest/download/install
 #### Windows (PowerShell as Administrator)
 
 ```powershell
-irm https://github.com/theakash04/Nubilus/releases/latest/download/install.ps1 | iex
+# Download the installer script
+curl.exe -L -o install.ps1 https://github.com/theakash04/Nubilus/releases/latest/download/install.ps1
+
+# Run the installer
+powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
-The PowerShell installer will:
+The installer will:
 
 - Download the binary to `C:\Program Files\nubilus\`
 - Create config at `C:\ProgramData\nubilus\agent.toml`
-- Register `nubilus-agent` as a Windows Service with auto-restart
 - Add the install directory to your system PATH
+
+After running the installer, you need to register and start the service manually:
+
+```powershell
+# Register the Windows service (use 'service' argument, not 'run')
+sc.exe create nubilus-agent binPath= "\"C:\Program Files\nubilus\nubilus-agent.exe\" service" start= auto
+
+# Start the service
+sc.exe start nubilus-agent
+```
 
 ### Manual Installation
 
@@ -346,9 +359,16 @@ sudo mkdir -p /etc/nubilus
 Download `nubilus-agent-windows-amd64.exe` from the [latest release](https://github.com/theakash04/Nubilus/releases/latest) and place it in `C:\Program Files\nubilus\`.
 
 ```powershell
-# Create config directory
+# Create directories
+New-Item -ItemType Directory -Force -Path "C:\Program Files\nubilus"
 New-Item -ItemType Directory -Force -Path "C:\ProgramData\nubilus"
+
+# Register as a Windows Service (use 'service' subcommand, not 'run')
+sc.exe create nubilus-agent binPath= '"C:\Program Files\nubilus\nubilus-agent.exe" service' start= auto DisplayName= "Nubilus Monitoring Agent"
 ```
+
+> [!IMPORTANT]
+> You must use `service` (not `run`) in the `binPath`. The `service` subcommand implements the Windows Service Control Manager protocol. Using `run` will cause **Error 1053**.
 
 ### Configuration
 
@@ -392,18 +412,26 @@ sudo journalctl -u nubilus-agent -f
 #### Windows
 
 ```powershell
-# If installed via install.ps1, the service is already registered
+# Register the Windows service (if not already registered)
+sc.exe create nubilus-agent binPath= "\"C:\Program Files\nubilus\nubilus-agent.exe\" service" start= auto
+
+# Start the service
 sc.exe start nubilus-agent
 
 # Check status
 sc.exe query nubilus-agent
+
+# View service config
+sc.exe qc nubilus-agent
 ```
 
-#### Run Manually (all platforms)
-
-```bash
-nubilus-agent run
-```
+> [!NOTE]
+> The agent runs in two modes:
+>
+> - `nubilus-agent run` — Console/foreground mode (for manual use and debugging)
+> - `nubilus-agent service` — Windows Service mode (used by SCM, supports start/stop/restart)
+>
+> The installer automatically registers the service with the `service` subcommand.
 
 ### Build from Source
 
@@ -532,6 +560,20 @@ Check connection settings in `.env`:
 ```bash
 POSTGRES_HOST=timescaledb  # Use 'localhost' for manual setup
 POSTGRES_PORT=5432
+```
+
+#### Windows Service fails with Error 1053
+
+If `sc.exe start nubilus-agent` returns Error 1053, the service `binPath` is using `run` instead of `service`:
+
+```powershell
+# Check current binPath
+sc.exe qc nubilus-agent
+
+# Fix: delete and re-create with 'service' subcommand
+sc.exe delete nubilus-agent
+sc.exe create nubilus-agent binPath= '"C:\Program Files\nubilus\nubilus-agent.exe" service' start= auto
+sc.exe start nubilus-agent
 ```
 
 ---

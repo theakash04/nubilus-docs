@@ -126,18 +126,36 @@ sudo systemctl enable --now nubilus-agent
 #### Windows (PowerShell as Administrator)
 
 ```powershell
-# Download and install
-irm https://github.com/theakash04/Nubilus/releases/latest/download/install.ps1 | iex
+# Download the installer script
+curl.exe -L -o install.ps1 https://github.com/theakash04/Nubilus/releases/latest/download/install.ps1
+
+# Run the installer
+powershell -ExecutionPolicy Bypass -File .\install.ps1
 
 # Configure with your API key
 nubilus-agent.exe configure --api-url "backend_url/api/v1" --api-key "nub_your_api_key_here"
 
-# Register your agent
+# Register your agent (first-time registration)
 nubilus-agent.exe run
+
+# Register the Windows service (use 'service' argument, not 'run')
+sc.exe create nubilus-agent binPath= "\"C:\Program Files\nubilus\nubilus-agent.exe\" service" start= auto
 
 # Start the service
 sc.exe start nubilus-agent
+
+# Check status
+sc.exe query nubilus-agent
 ```
+
+> [!IMPORTANT]
+> The service must be registered with the `service` argument, **not** `run`. Using `run` will cause **Error 1053** because the `run` subcommand starts a console app, not a Windows Service.
+
+> [!NOTE]
+> The agent supports two modes:
+>
+> - **`nubilus-agent run`** — Console/foreground mode (for manual use and first-time registration)
+> - **`nubilus-agent service`** — Windows Service mode (used by SCM for background operation)
 
 ### Verify Connection
 
